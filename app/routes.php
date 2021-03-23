@@ -7,7 +7,7 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 // MySQL
-$pdo = getConnection();
+$pdo = configConnection();
 
 return function (App $app) use ($pdo) {
     $app->options('/{routes:.*}',
@@ -140,7 +140,7 @@ return function (App $app) use ($pdo) {
     });
 };
 
-function getConnection() {
+function configConnection() {
 	$dbhost="localhost";
 	$dbuser="root";
 	$dbpass="1234";
