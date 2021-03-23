@@ -1,42 +1,35 @@
-# Slim Framework 4 Skeleton Application
+# Módulo de pesquisa [Parte 2 - Back]
+Requisitos: PHP, Composer, Slim Framework e MySQL
 
-[![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
-
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation. It also uses the Monolog logger.
-
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
-
-## Install the Application
-
-Run this command from the directory in which you want to install your new Slim Framework application.
-
-```bash
-composer create-project slim/slim-skeleton [my-app-name]
+### Clone o repositório
+```
+git clone https://github.com/renanramoslinhares/modulo_de_pesquisas_back
 ```
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
-
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writable.
-
-To run the application in development, you can run these commands 
-
-```bash
-cd [my-app-name]
-composer start
+### Agora instale as dependências
+```
+cd modulo_de_pesquisas_back && composer install
 ```
 
-Or you can use `docker-compose` to run the app with `docker`, so you can run these commands:
-```bash
-cd [my-app-name]
-docker-compose up -d
+### Insira suas credencias para permitir que o back end  interaja com o MySQL
+Vá em `app/routes.php` e altere a função `configConnection()` // isto pode ser aperfeiçoado
+
+### Importar banco de dados
+Na raiz do projeto há um arquivo chamado `start.sql`. Você pode importá-lo manualmente ou rodando os seguintes comandos:
+
+###### "Entre" no MySQL e insira sua senha (você pode utilizar outro nome de usuário)
+`mysql -u root -p`
 ```
-After that, open `http://localhost:8080` in your browser.
-
-Run this command in the application directory to run the test suite
-
-```bash
-composer test
+mysql> source ./start.sql;
 ```
 
-That's it! Now go build something cool.
+### Ligar o servidor PHP na porta :8000
+Feche o mysql e ative o servidor da API
+```
+php -S localhost:8000 -t public public/index.php
+```
+PRONTO.
+
+Observação:
+  É importante deixar os dois servideores ativos para navegar.
+  Um sustenta o back-end, com PHP e outro, do front, roda com NODE.
